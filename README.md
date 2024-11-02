@@ -1,14 +1,16 @@
-# GDWeave.Sample
+# CommandsEx
 
-A sample for C# [GDWeave](https://github.com/NotNite/GDWeave) mods.
+Allows developers to register commands in the WEBFISHING chat without patching, inside GDScript.
 
-## Setup
+## API Code Example
 
-Clone/fork/whatever this repository. Pick an ID for your project (people like to do `Username.ProjectName`, but there is no enforced naming scheme). Rename the following:
-
-- Solution name, project name, and project namespace to your project ID
-- Various fields in the manifest.json to your project ID and name
-
-## Building
-
-To build the project, you need to set the `GDWeavePath` environment variable to your game install's GDWeave directory (e.g. `G:\games\steam\steamapps\common\WEBFISHING\GDWeave`). This can also be done in Rider with `File | Settings | Build, Execution, Deployment | Toolset and Build | MSBuild global properties` or with a .user file in Visual Studio.
+```
+func _ready():
+    var node = get_node("/root/CommandsEx")
+    node.connect("on_command", self, "_recieve")
+    
+func _recieve(text, args):
+    if (text == "/mycommand"):
+        PlayerData._send_notification("Now these points of data make a beautiful line")
+        PlayerData._send_notification("We're out of beta we're releasing on time")
+```
