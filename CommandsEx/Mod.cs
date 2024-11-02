@@ -1,16 +1,17 @@
-﻿using GDWeave;
+﻿using CommandsEx.Patches;
+using GDWeave;
 
-namespace GDWeave.Sample;
+namespace CommandsEx;
 
 public class Mod : IMod {
-    public Config Config;
+    public static Mod Instance;
 
     public Mod(IModInterface modInterface) {
-        this.Config = modInterface.ReadConfig<Config>();
-        modInterface.Logger.Information("Hello, world!");
+        Instance = this;
+        modInterface.RegisterScriptMod(new ChatPatch());
     }
 
     public void Dispose() {
-        // Cleanup anything you do here
+        
     }
 }
